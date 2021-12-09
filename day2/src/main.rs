@@ -5,7 +5,7 @@ use itertools::Itertools;
 
 fn part1(input: &mut String) -> i32 {
     let mut vals = (0, 0);
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         for (direction, amount) in line
             .split_whitespace()
             .tuples()
@@ -19,7 +19,7 @@ fn part1(input: &mut String) -> i32 {
             }
         }
     }
-    return vals.0 * vals.1;
+    vals.0 * vals.1
 }
 
 struct Values {
@@ -29,7 +29,7 @@ struct Values {
 }
 fn part2(input: &mut String) -> i32 {
     let mut vals = Values { x: 0, y: 0, aim: 0 };
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         for (direction, amount) in line
             .split_whitespace()
             .tuples()
@@ -38,7 +38,7 @@ fn part2(input: &mut String) -> i32 {
             match direction {
                 "forward" => {
                     vals.x += amount;
-                    vals.y += amount*vals.aim;
+                    vals.y += amount * vals.aim;
                 }
                 "down" => vals.aim += amount,
                 "up" => vals.aim -= amount,
@@ -46,7 +46,7 @@ fn part2(input: &mut String) -> i32 {
             }
         }
     }
-    return vals.x * vals.y;
+    vals.x * vals.y
 }
 
 fn main() -> io::Result<()> {
@@ -54,5 +54,5 @@ fn main() -> io::Result<()> {
     io::stdin().lock().read_to_string(&mut input);
 
     println!("{} {}", part1(&mut input), part2(&mut input));
-    return Ok(());
+    Ok(())
 }

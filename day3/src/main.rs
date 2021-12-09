@@ -6,9 +6,9 @@ use bitstring::BitString;
 use itertools::Itertools;
 
 fn part1(input: &mut String) -> i64 {
-    let nbits = input.split("\n").next().unwrap().len();
+    let nbits = input.split('\n').next().unwrap().len();
     let mut arr: Vec<i64> = vec![0; nbits];
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         for (idx, c) in itertools::enumerate(line.chars()) {
             match c {
                 '1' => arr[idx] += 1,
@@ -29,7 +29,7 @@ fn part1(input: &mut String) -> i64 {
         .for_each(|x| epsilon.push_str(&x.to_string()));
     let epsilon = i64::from_str_radix(&epsilon, 2).unwrap();
 
-    return gamma * epsilon;
+    gamma * epsilon
 }
 
 fn get_bit_counts(set: &mut HashSet<String>, pos: usize) -> (i32, i32) {
@@ -41,14 +41,14 @@ fn get_bit_counts(set: &mut HashSet<String>, pos: usize) -> (i32, i32) {
             _ => panic!("Invalid character"),
         }
     }
-    return counts;
+    counts
 }
 
 fn part2(input: &mut String) -> i64 {
-    let nbits = input.split("\n").next().unwrap().len();
+    let nbits = input.split('\n').next().unwrap().len();
     let mut set: HashSet<String> = HashSet::from_iter(
         input
-            .split("\n")
+            .split('\n')
             .filter(|x| !x.is_empty())
             .map(|x| x.to_string()),
     );
@@ -68,7 +68,7 @@ fn part2(input: &mut String) -> i64 {
 
     let mut set: HashSet<String> = HashSet::from_iter(
         input
-            .split("\n")
+            .split('\n')
             .filter(|x| !x.is_empty())
             .map(|x| x.to_string()),
     );
@@ -89,7 +89,7 @@ fn part2(input: &mut String) -> i64 {
     }
     let co2_scrub_rate = i64::from_str_radix(set.iter().next().unwrap(), 2).unwrap();
     println!("{} {}", oxygen_gen_rate, co2_scrub_rate);
-    return oxygen_gen_rate * co2_scrub_rate;
+    oxygen_gen_rate * co2_scrub_rate
 }
 
 fn main() -> io::Result<()> {
@@ -97,5 +97,5 @@ fn main() -> io::Result<()> {
     io::stdin().lock().read_to_string(&mut input);
 
     println!("{} {}", part1(&mut input), part2(&mut input));
-    return Ok(());
+    Ok(())
 }

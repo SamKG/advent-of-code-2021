@@ -28,7 +28,7 @@ impl Bingo {
                 return true;
             }
         }
-        return false;
+        false
     }
     fn mark(&mut self, val: i64) {
         for (i, row) in self.board.outer_iter().enumerate() {
@@ -48,22 +48,22 @@ impl Bingo {
                 }
             }
         }
-        return vals;
+        vals
     }
 }
 
 fn parse_input(input: &mut String) -> (Vec<i64>, Vec<Bingo>) {
-    let mut lines = input.split("\n").filter(|s| !s.is_empty());
+    let mut lines = input.split('\n').filter(|s| !s.is_empty());
 
     let mut numbers: Vec<i64> = lines
         .next()
         .unwrap()
-        .split(",")
+        .split(',')
         .map(|s| s.parse::<i64>().unwrap())
         .collect();
 
     let mut input_numbers = lines.flat_map(|line| {
-        line.split(" ")
+        line.split(' ')
             .filter(|c| !c.is_empty())
             .map(|num| num.parse::<i64>().unwrap())
     });
@@ -84,7 +84,7 @@ fn parse_input(input: &mut String) -> (Vec<i64>, Vec<Bingo>) {
         })
         .collect();
 
-    return (numbers, boards);
+    (numbers, boards)
 }
 
 fn part1(input: &mut String) -> i64 {
@@ -98,7 +98,7 @@ fn part1(input: &mut String) -> i64 {
             }
         }
     }
-    return 0;
+    0
 }
 
 fn part2(input: &mut String) -> i64 {
@@ -108,7 +108,7 @@ fn part2(input: &mut String) -> i64 {
         for (idx, board) in boards.iter_mut().enumerate() {
             board.mark(num);
             if board.is_won() {
-                won_boards.push((board.get_unmarked().iter().sum::<i64>() * num));
+                won_boards.push(board.get_unmarked().iter().sum::<i64>() * num);
             }
         }
         boards = boards
@@ -125,5 +125,5 @@ fn main() -> io::Result<()> {
     io::stdin().lock().read_to_string(&mut input);
 
     println!("{} {}", part1(&mut input), part2(&mut input));
-    return Ok(());
+    Ok(())
 }
